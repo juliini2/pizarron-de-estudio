@@ -10,6 +10,7 @@
     temperatura: { C: 'C', F: 'F', K: 'K' }
   };
   const GRUPOS = ['Por leer', 'Ideas clave', 'Ejercicios'];
+  const ETIQUETAS_GRUPO = { 'Por leer': 'Pendientes', 'Ideas clave': 'Ideas clave', Ejercicios: 'Cálculos' };
 
   function convertir(magnitud, valor, origen, destino) {
     const numero = Number(valor);
@@ -96,7 +97,7 @@
         tarjeta.className = 'nota';
         const etiqueta = documento.createElement('p');
         etiqueta.className = 'nota-grupo';
-        etiqueta.textContent = nota.grupo;
+        etiqueta.textContent = ETIQUETAS_GRUPO[nota.grupo] || nota.grupo;
         const contenido = documento.createElement('p');
         contenido.className = 'nota-texto';
         contenido.textContent = nota.texto;
@@ -168,13 +169,13 @@
         const textoResultado = `${numero.toLocaleString('es-AR', { maximumSignificantDigits: 12 })} ${destino.options[destino.selectedIndex].textContent.match(/\((.*?)\)/)?.[1] || destino.value}`;
         resultadoActual = `${valor.value} ${origen.value} = ${textoResultado}`;
         salida.textContent = resultadoActual; salida.classList.add('resultado-listo'); anotarBtn.disabled = false;
-        avisar('Conversión lista. Podés guardarla como ejercicio.');
+        avisar('Conversión lista. Podés guardarla como nota de Cálculos.');
       } catch (error) { limpiarResultado(); salida.textContent = error.message; avisar(error.message, true); }
     });
     anotarBtn.addEventListener('click', () => {
       if (!resultadoActual) return;
       const nota = { id: `nota-${entorno.crypto && entorno.crypto.randomUUID ? entorno.crypto.randomUUID() : Date.now().toString(36)}`, texto: resultadoActual, grupo: 'Ejercicios' };
-      if (guardar([nota, ...notas], 'Conversión guardada en Ejercicios.')) { filtro.value = 'todas'; dibujarNotas(); }
+      if (guardar([nota, ...notas], 'Conversión guardada en Cálculos.')) { filtro.value = 'todas'; dibujarNotas(); }
     });
     try {
       const guardado = entorno.localStorage.getItem(CLAVE_NOTAS);
@@ -192,5 +193,5 @@
     cambiarUnidades(); dibujarNotas();
   }
 
-  return { CLAVE_NOTAS, convertir, leerNotas, guardarNotas, iniciar };
+  return { CLAVE_NOTAS, convertir, leerNotas, guardarNotas, ETIQUETAS_GRUPO, iniciar };
 });
