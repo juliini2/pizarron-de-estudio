@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff9fc">
+  <meta name="description" content="Un cuaderno para guardar ideas de estudio y convertir unidades en Club Entre Líneas.">
+  <title>Cuaderno de ideas — Entre Líneas</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="pagina">
+    <header class="cabecera">
+      <a class="marca" href="#inicio" aria-label="Club Entre Líneas, inicio"><span class="marca-icono" aria-hidden="true">e·l</span><span>CLUB DE ESTUDIO<br><strong>ENTRE LÍNEAS</strong></span></a>
+      <div class="cabecera-titulo"><span class="sobrelinea">UN LUGAR PARA VOLVER A TUS IDEAS</span><h1 id="inicio">Cuaderno de ideas</h1></div>
+      <span class="sello">EDICIÓN<br><strong>01</strong></span>
+    </header>
+
+    <main class="distribucion">
+      <section class="zona-apuntes" aria-labelledby="titulo-apuntes">
+        <div class="introduccion"><span class="numero-seccion">01 / APUNTES</span><h2 id="titulo-apuntes">Las ideas también<br>se estudian.</h2><p>Guardá lo que quieras retomar. Un fragmento, una pregunta, una conexión inesperada.</p></div>
+        <form id="formulario-nota" class="editor">
+          <label for="texto-nota">Tu nota</label>
+          <textarea id="texto-nota" name="texto" rows="4" placeholder="Escribí acá lo que no querés olvidar…" required></textarea>
+          <div class="editor-pie"><div class="campo-grupo"><label for="grupo-nota">Guardar en</label><select id="grupo-nota" name="grupo"><option>Por leer</option><option>Ideas clave</option><option>Ejercicios</option></select></div><div class="acciones-editor"><button id="guardar-nota" class="boton boton-principal" type="submit">Guardar nota <span aria-hidden="true">↗</span></button><button id="cancelar-edicion" class="boton boton-ligero" type="button" hidden>Cancelar</button></div></div>
+        </form>
+        <div class="lista-cabecera"><div><span class="numero-seccion">02 / TU MESA</span><h2>Apuntes</h2></div><div class="campo-filtro"><label for="filtro">Ver</label><select id="filtro"><option value="todas">Todos</option><option>Por leer</option><option>Ideas clave</option><option>Ejercicios</option></select></div></div>
+        <div id="notas" class="lista-notas" aria-live="polite"></div>
+      </section>
+
+      <aside class="columna-lateral" aria-labelledby="titulo-conversor">
+        <div class="conversor-encabezado"><span class="numero-seccion">03 / HERRAMIENTA</span><span class="icono-regla" aria-hidden="true">↔</span><h2 id="titulo-conversor">Conversor<br>de unidades</h2><p>Las cuentas pequeñas,<br>un poco más simples.</p></div>
+        <form id="formulario-conversion" class="formulario-conversion">
+          <div class="campo"><label for="magnitud">Magnitud</label><select id="magnitud"><option value="longitud">Longitud</option><option value="masa">Masa</option><option value="temperatura">Temperatura</option></select></div>
+          <div class="campo"><label for="valor">Valor</label><input id="valor" type="number" step="any" inputmode="decimal" placeholder="Por ejemplo, 2,5" required></div>
+          <div class="unidades"><div class="campo"><label for="origen">De</label><select id="origen"></select></div><span class="flecha-unidades" aria-hidden="true">→</span><div class="campo"><label for="destino">A</label><select id="destino"></select></div></div>
+          <button id="convertir" class="boton boton-ciruela" type="submit">Convertir <span aria-hidden="true">↗</span></button>
+        </form>
+        <div id="conversion" class="resultado" aria-live="polite" aria-atomic="true">El resultado aparecerá acá.</div>
+        <button id="anotar-conversion" class="boton boton-anotar" type="button" disabled>＋ Guardar en Ejercicios</button>
+        <p class="nota-privacidad">Tus notas quedan en este navegador.</p>
+      </aside>
+    </main>
+
+    <footer class="pie"><p id="estado" role="status" aria-live="polite">Preparando tu cuaderno…</p><span>LEER · PENSAR · COMPARTIR</span></footer>
+  </div>
+</body>
+</html>
